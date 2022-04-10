@@ -61,7 +61,6 @@ struct Hermite <: AbstractHermite
     end
 end
 
-# Hermite polynomials functions
 """
     HermiteH(n, x)
     HermiteH(x; n)
@@ -82,7 +81,6 @@ Evaluates the nth Hermite polynomial at x ∈ ℝ.
 H(n, x) = HermiteH(n, x)
 H(x; n) = HermiteH(x; n)
 
-# Functions for getting properties 
 """
     coefficients(H)
 
@@ -210,7 +208,6 @@ Evaluates the nth probabilist's Hermite polynomial at x ∈ ℝ.
 He(n, x) = HermiteHe(n, x)
 He(x; n) = HermiteHe(x; n)
 
-# Functions for getting properties 
 """
     coefficients(He)
 
