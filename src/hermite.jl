@@ -111,7 +111,7 @@ using the orthogonality relation
 ``\\int_{-\\infty}^{\\infty} H_m(x) H_n(x) e^{-x^2} \\: \\mathrm{d}x = \\sqrt{\\pi} 2^n n! \\delta_{nm}``.
 """
 function innerproduct(H1::Hermite, H2::Hermite)
-    n, m = H1.n, H2.m
+    n, m = H1.n, H2.n
     if n != m
         return 0
     else
@@ -239,7 +239,7 @@ Calculates the inner product of the probabilist's Hermite polynomials
 ``\\int_{-\\infty}^{\\infty} He_m(x) He_n(x) e^{-(x/2)^2} \\: \\mathrm{d}x = \\sqrt{2\\pi} n! \\delta_{nm}``.
 """
 function innerproduct(He1::ProbabilistHermite, He2::ProbabilistHermite)
-    n, m = He1.n, He2.m
+    n, m = He1.n, He2.n
     if n != m
         return 0
     else
