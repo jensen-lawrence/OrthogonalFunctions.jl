@@ -163,29 +163,29 @@ struct AssociatedLaguerre{T<:Real} <: AbstractLaguerre
         polynomial = x -> evalpoly(x, coefficients)
         weight = x -> (x^α)*exp(-x)
         interval = (0, Inf)
-        new(n, α, coefficients, polynomial, weight, interval)
+        new{T}(n, α, coefficients, polynomial, weight, interval)
     end
 end
 
 """
-    LaguerreL(n, α, x)
-    LaguerreL(x; n, α)
+    LaguerreLα(n, α, x)
+    LaguerreLα(x; n, α)
 
 Evaluates the (n, α) associated Laguerre polynomial at x ∈ ℝ.
 """
-function LaguerreL(n::Int, α::T1, x::T2) where {T1,T2<:Real}
+function LaguerreLα(n::Int, α::T1, x::T2) where {T1,T2<:Real}
     return AssociatedLaguerre(n, α).polynomial(x)
 end
-LaguerreL(x; n, α) = LaguerreL(n, α, x)
+LaguerreLα(x; n, α) = LaguerreLα(n, α, x)
 
 """
-    L(n, α, x)
-    L(x; n, α)
+    Lα(n, α, x)
+    Lα(x; n, α)
 
  Evaluates the (n, α) associated Laguerre polynomial at x ∈ ℝ.
 """
-L(n, α, x) = LaguerreL(n, α, x)
-L(x; n, α) = LaguerreL(x; n, α)
+Lα(n, α, x) = LaguerreLα(n, α, x)
+Lα(x; n, α) = LaguerreLα(x; n, α)
 
 """
     coefficients(L)
@@ -236,9 +236,11 @@ end
 # ----------------------------------------------------------------------------------------------------------------------
 
 export Laguerre 
-export AssociatedLaguerre 
 export LaguerreL 
 export L 
+export AssociatedLaguerre 
+export LaguerreLα
+export Lα
 export coefficients 
 export weight 
 export interval 
