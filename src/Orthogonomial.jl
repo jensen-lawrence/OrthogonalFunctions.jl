@@ -15,5 +15,6 @@ abstract type AbstractLegendre <: AbstractJacobi end
 # Files
 include("hermite.jl")
 include("laguerre.jl")
+include("chebyshev.jl")
 
 end
