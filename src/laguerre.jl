@@ -163,6 +163,7 @@ struct AssociatedLaguerre{T<:Real} <: AbstractLaguerre
         polynomial = x -> evalpoly(x, coefficients)
         weight = x -> (x^α)*exp(-x)
         interval = (0, Inf)
+        T = promote_type(typeof(α))
         new{T}(n, α, coefficients, polynomial, weight, interval)
     end
 end
