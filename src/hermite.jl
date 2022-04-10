@@ -43,7 +43,7 @@ Representation of the nth Hermite polynomial. Available methods include:
 - `coefficients`: the polynomial coefficients 
 - `polynomial`: the polynomial function 
 - `weight`: the Hermite polynomial weight function, ``w(x) = e^{-x^2}``
-- `interval`: the Hermite polynomial orthogonality interval, ``(-\\inf, \\inf)``
+- `interval`: the Hermite polynomial orthogonality interval, ``(-\\infty, \\infty)``
 """
 struct Hermite <: AbstractHermite 
     n::Int
@@ -108,7 +108,7 @@ interval(H::Hermite) = H.interval
 Calculates the inner product of the Hermite polynomials `H1` and `H2`
 using the orthogonality relation 
 
-``\\int_{-\\inf}^{\\inf} H_m(x) H_n(x) e^{-x^2} \\: \\mathrm{d}x = \\sqrt{\\pi} 2^n n! \\delta_{nm}``.
+``\\int_{-\\infty}^{\\infty} H_m(x) H_n(x) e^{-x^2} \\: \\mathrm{d}x = \\sqrt{\\pi} 2^n n! \\delta_{nm}``.
 """
 function innerproduct(H1::Hermite, H2::Hermite)
     n, m = H1.n, H2.m
@@ -170,7 +170,7 @@ include:
 - `coefficients`: the polynomial coefficients 
 - `polynomial`: the polynomial function 
 - `weight`: the probabilist's Hermite polynomial weight function, ``w(x) = e^{-(x^2)/2}``
-- `interval`: the probabillist's Hermite polynomial orthogonality interval, ``(-\\inf, \\inf)``
+- `interval`: the probabillist's Hermite polynomial orthogonality interval, ``(-\\infty, \\infty)``
 """
 struct ProbabilistHermite <: AbstractHermite 
     n::Int
@@ -236,7 +236,7 @@ interval(He::ProbabilistHermite) = He.interval
 Calculates the inner product of the probabilist's Hermite polynomials
 `He1` and `He2` using the orthogonality relation 
 
-``\\int_{-\\inf}^{\\inf} He_m(x) He_n(x) e^{-(x/2)^2} \\: \\mathrm{d}x = \\sqrt{2\\pi} n! \\delta_{nm}``.
+``\\int_{-\\infty}^{\\infty} He_m(x) He_n(x) e^{-(x/2)^2} \\: \\mathrm{d}x = \\sqrt{2\\pi} n! \\delta_{nm}``.
 """
 function innerproduct(He1::ProbabilistHermite, He2::ProbabilistHermite)
     n, m = He1.n, He2.m
