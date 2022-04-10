@@ -128,9 +128,17 @@ function associated_laguerre_coefficients(n::Int, α::T) where {T<:Real}
     coefficients = zeros(n + 1)
     for k ∈ 0:n
         if k ≤ 20
-            coefficients[k+1] = ((-1)^k)/factorial(k) * binomial(n + α, n - k)
+            if typeof(α) <: Int
+                coefficients[k+1] = ((-1)^k)/factorial(k) * binomial(n + α, n - k)
+            else
+                coefficients[k+1] = ((-1)^k)/factorial(k) * gamma(n + α + 1)/(gamma(n - k + 1) * gamma(α + k + 1))
+            end
         else
-            coefficients[k+1] = ((-1)^k)/gamma(k + 1) * binomial(n + α, n - k)
+            if typeof(α) <: Int
+                coefficients[k+1] = ((-1)^k)/gamma(k + 1) * binomial(n + α, n - k)
+            else
+                coefficients[k+1] = ((-1)^k)/gamma(k + 1) * gamma(n + α + 1)/(gamma(n - k + 1) * gamma(α + k + 1))
+            end
         end
     end
     return SVector{n+1}(coefficients)
