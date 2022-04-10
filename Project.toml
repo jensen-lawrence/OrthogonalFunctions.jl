@@ -1,3 +1,8 @@
+name = "Orthogonomial"
+uuid = "89e53857-4b49-4cc9-917a-f7c4c7bf589a"
+authors = ["Jensen Lawrence <jptlawre@uwaterloo.ca>"]
+version = "0.0.1"
+
 [deps]
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
