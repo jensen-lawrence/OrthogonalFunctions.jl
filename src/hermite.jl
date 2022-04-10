@@ -3,17 +3,26 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 """
-    hermite_coefficients_direct(n)
+    hermite_coefficients(n)
 
-Calculates the coefficients of the nth Hermite polynomial using the power series
-representation of Hermite polynomials,
+Calculates the coefficients of the nth Hermite polynomial using the power
+series representation of Hermite polynomials,
 
 ``H_n(x) = n! \\sum_{k=0}^{\\lfloor n/2 \\rfloor} \\frac{(-1)^k}{k!(n - 2k)!} (2x)^{n - 2k}``.
+
+Coefficients are ordered from lowest to highest degree for compatibility
+with `evalpoly`.
 """
-function hermite_coefficients_direct(n::Int)
-    nonzero = factorial(n) .* [((-1.0)^k * 2.0^(n - 2k))/(factorial(k) * factorial(n - 2k)) for k ∈ floor(n/2):-1:0]
-    nonzero = map(x -> round(Int, x), nonzero)
-    coefficients = zeros(Int, n + 1)
+function hermite_coefficients(n::Int)
+    if n ≤ 20
+        nonzero = factorial(n) .* [((-1.0)^k * 2.0^(n - 2k))/(factorial(k) * factorial(n - 2k)) for k ∈ floor(n/2):-1:0]
+    else
+        nonzero = gamma(n + 1) .* [((-1.0)^k * 2.0^(n - 2k))/(gamma(k + 1) * gamma(n - 2k + 1)) for k ∈ floor(n/2):-1:0]
+    end
+
+    nonzero = map(x -> round(x), nonzero)
+
+    coefficients = zeros(n + 1)
     if n % 2 == 0
         for i ∈ 1:length(nonzero)
             coefficients[2i-1] = nonzero[i]
@@ -24,42 +33,6 @@ function hermite_coefficients_direct(n::Int)
         end
     end
     return SVector{n+1}(coefficients)
-end
-
-"""
-    hermite_coefficients_recursive(n)
-
-Calculates the coefficients of the nth Hermite polynomial using the Hermite
-polynomial recurrence relation
-
-``H_n(x) = 2xH_{n-1}(x) - 2(n - 1)H_{n-2}(x)``.
-"""
-function hermite_coefficients_recursive(n::Int)
-    last1 = zeros(n + 1)
-    last2 = zeros(n + 1)
-    last1[2:end] = hermite_coefficients(n - 1)
-    last2[1:end-2] = hermite_coefficients(n - 2)
-    coefficients = (2 * last1) - (2 * (n - 1) * last2)
-    if maximum(coefficients) ≤ typemax(Int)
-        coefficients = map(x -> round(Int, x), coefficients)
-    end
-    return SVector{n+1}(coefficients)
-end
-
-"""
-    hermite_coefficients(n)
-
-Calculates the coefficients of the nth Hermite polynomial. Switches from
-`hermite_coefficients_direct` to `hermite_coefficients_recursive` for n > 20
-due to integer overflow. Coefficients are ordered from lowest to highest
-degree for compatibility with `evalpoly`.
-"""
-function hermite_coefficients(n::Int)
-    if n ≤ 20
-        return hermite_coefficients_direct(n)
-    else
-        return hermite_coefficients_recursive(n)
-    end
 end
 
 """
@@ -158,17 +131,26 @@ end
 # ----------------------------------------------------------------------------------------------------------------------
 
 """
-    probabilist_hermite_coefficients_direct(n)
+    probabilist_hermite_coefficients(n)
 
-Calculates the coefficients of the nth probabilist's Hermite polynomial using
-the power series representation of probabilist's Hermite polynomials,
+Calculates the coefficients of the nth probabilist's Hermite polynomial
+using the power series representation of probabilist's Hermite polynomials,
 
 ``He_n(x) = n! \\sum_{k=0}^{\\lfloor n/2 \\rfloor} \\frac{(-1)^k}{k!(n - 2k)!} \\frac{x^{n - 2k}}{2^k}``.
+
+Coefficients are ordered from lowest to highest degree for compatibility
+with `evalpoly`.
 """
-function probabilist_hermite_coefficients_direct(n::Int)
-    nonzero = factorial(n) .* [((-1.0)^k)/(2.0^k * factorial(k) * factorial(n - 2k)) for k ∈ floor(n/2):-1:0]
-    nonzero = map(x -> round(Int, x), nonzero)
-    coefficients = zeros(Int, n + 1)
+function probabilist_hermite_coefficients(n::Int)
+    if n ≤ 20
+        nonzero = factorial(n) .* [((-1.0)^k)/(2.0^k * factorial(k) * factorial(n - 2k)) for k ∈ floor(n/2):-1:0]
+    else
+        nonzero = gamma(n + 1) .* [((-1.0)^k)/(2.0^k * gamma(k + 1) * gamma(n - 2k + 1)) for k ∈ floor(n/2):-1:0]
+    end
+
+    nonzero = map(x -> round(x), nonzero)
+
+    coefficients = zeros(n + 1)
     if n % 2 == 0
         for i ∈ 1:length(nonzero)
             coefficients[2i-1] = nonzero[i]
@@ -179,43 +161,6 @@ function probabilist_hermite_coefficients_direct(n::Int)
         end
     end
     return SVector{n+1}(coefficients)
-end
-
-"""
-    probabilist_hermite_coefficients_recursive(n)
-
-Calculates the coefficients of the nth probabilist's Hermite polynomial using
-the probabilist's Hermite polynomial recurrence relation
-
-``He_n(x) = xHe_{n-1}(x) - (n - 1)He_{n-2}(x)``.
-"""
-function probabilist_hermite_coefficients_recursive(n::Int)
-    last1 = zeros(n + 1)
-    last2 = zeros(n + 1)
-    last1[2:end] = probabilist_hermite_coefficients(n - 1)
-    last2[1:end-2] = probabilist_hermite_coefficients(n - 2)
-    coefficients = last1 - ((n - 1) * last2)
-    if maximum(coefficients) ≤ typemax(Int)
-        coefficients = map(x -> round(Int, x), coefficients)
-    end
-    return SVector{n+1}(coefficients)
-end
-
-"""
-    probabilist_hermite_coefficients(n)
-
-Calculates the coefficients of the nth probabilist's Hermite polynomial.
-Switches from `probabilist_hermite_coefficients_direct` to
-`probabilist_hermite_coefficients_recursive` for n > 20 due to integer
-overflow. Coefficients are ordered from lowest to highest degree for
-compatibility with `evalpoly`.
-"""
-function probabilist_hermite_coefficients(n::Int)
-    if n ≤ 20
-        return probabilist_hermite_coefficients_direct(n)
-    else
-        return probabilist_hermite_coefficients_recursive(n)
-    end
 end
 
 """
