@@ -8,7 +8,7 @@
 Calculates the coefficients of the nth Laguerre polynomial using the power
 series representation of Laguerre polynomials,
 
-``L_n(x) = \\sum_{k=0}^n (-1)^k \\binom{n, k} \frac{x^k}{k!}``
+``L_n(x) = \\sum_{k=0}^n (-1)^k \\binom{n}{k} \frac{x^k}{k!}``
 
 Coefficients are ordered from lowest to highest degree for compatibility
 with `evalpoly`.
@@ -119,29 +119,33 @@ end
 Calculates the coefficients of the (n, α) associated Laguerre polynomial using
 the power series representation of associated Laguerre polynomials,
 
-``L_n^{(\\alpha)}(x) = \\sum_{k=0}^n (-1)^k \\binom{n + α, n - k} \frac{x^k}{k!}``
+``L_n^{(\\alpha)}(x) = \\sum_{k=0}^n (-1)^k \\binom{n + α}{n - k} \frac{x^k}{k!}``
 
 Coefficients are ordered from lowest to highest degree for compatibility
 with `evalpoly`.
 """
 function associated_laguerre_coefficients(n::Int, α::T) where {T<:Real}
-    coefficients = zeros(n + 1)
-    for k ∈ 0:n
-        if k ≤ 20
-            if typeof(α) <: Int
-                coefficients[k+1] = ((-1)^k)/factorial(k) * binomial(n + α, n - k)
+    if α == 0
+        return laguerre_coefficients(n)
+    else
+        coefficients = zeros(n + 1)
+        for k ∈ 0:n
+            if k ≤ 20
+                if typeof(α) <: Int
+                    coefficients[k+1] = ((-1)^k)/factorial(k) * binomial(n + α, n - k)
+                else
+                    coefficients[k+1] = ((-1)^k)/factorial(k) * gamma(n + α + 1)/(gamma(n - k + 1) * gamma(α + k + 1))
+                end
             else
-                coefficients[k+1] = ((-1)^k)/factorial(k) * gamma(n + α + 1)/(gamma(n - k + 1) * gamma(α + k + 1))
-            end
-        else
-            if typeof(α) <: Int
-                coefficients[k+1] = ((-1)^k)/gamma(k + 1) * binomial(n + α, n - k)
-            else
-                coefficients[k+1] = ((-1)^k)/gamma(k + 1) * gamma(n + α + 1)/(gamma(n - k + 1) * gamma(α + k + 1))
+                if typeof(α) <: Int
+                    coefficients[k+1] = ((-1)^k)/gamma(k + 1) * binomial(n + α, n - k)
+                else
+                    coefficients[k+1] = ((-1)^k)/gamma(k + 1) * gamma(n + α + 1)/(gamma(n - k + 1) * gamma(α + k + 1))
+                end
             end
         end
+        return SVector{n+1}(coefficients)
     end
-    return SVector{n+1}(coefficients)
 end
 
 """

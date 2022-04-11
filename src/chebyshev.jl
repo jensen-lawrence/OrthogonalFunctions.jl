@@ -111,7 +111,7 @@ interval(T::ChebyshevFirst) = T.interval
 Calculates the inner product of the Chebyshev polynomials of the first kind
 `T1` and `T2` using the orthogonality relation 
 
-``\\int_{-1}^{1} T_m(x) T_n(x) \\frac{1}{\\sqrt{1 - x^2}} \\: \\mathrm{d}x = \\frac{\\pi}{2}}\\delta_{nm}``,
+``\\int_{-1}^{1} T_m(x) T_n(x) \\frac{1}{\\sqrt{1 - x^2}} \\: \\mathrm{d}x = \\frac{\\pi}{2}\\delta_{nm}``,
 
 or ``\\pi`` if ``n = m = 0``.
 """
@@ -136,7 +136,7 @@ end
 Calculates the coefficients of the nth Chebyshev polynomial of the second kind 
 using the power series representation of Chebyshev polynomials of the second kind,
 
-``U_n(x) = \\sum_{k=0}^{\\lfloor n/2 \\rfloor} (-1)^k \\binom{n - k, k} (2x)^{n - 2k}``.
+``U_n(x) = \\sum_{k=0}^{\\lfloor n/2 \\rfloor} (-1)^k \\binom{n - k}{k} (2x)^{n - 2k}``.
 
 Coefficients are ordered from lowest to highest degree for compatibility
 with `evalpoly`.
