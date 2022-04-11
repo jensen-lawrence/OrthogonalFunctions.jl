@@ -13,8 +13,9 @@ abstract type AbstractChebyshev <: AbstractJacobi end
 abstract type AbstractLegendre <: AbstractJacobi end
 
 # Files
+include("chebyshev.jl")
 include("hermite.jl")
 include("laguerre.jl")
-include("chebyshev.jl")
+include("legendre.jl")
 
 end
