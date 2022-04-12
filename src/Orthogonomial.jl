@@ -17,5 +17,6 @@ include("chebyshev.jl")
 include("hermite.jl")
 include("laguerre.jl")
 include("legendre.jl")
+include("utils.jl")
 
 end
