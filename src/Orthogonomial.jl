@@ -8,9 +8,8 @@ using SpecialFunctions: gamma
 abstract type OrthogonalPolynomial end 
 abstract type AbstractHermite <: OrthogonalPolynomial end 
 abstract type AbstractLaguerre <: OrthogonalPolynomial end 
-abstract type AbstractJacobi <: OrthogonalPolynomial end 
-abstract type AbstractChebyshev <: AbstractJacobi end 
-abstract type AbstractLegendre <: AbstractJacobi end
+abstract type AbstractLegendre <: OrthogonalPolynomial end 
+abstract type AbstractChebyshev <: OrthogonalPolynomial end
 
 # Files
 include("chebyshev.jl")
