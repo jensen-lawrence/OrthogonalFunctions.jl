@@ -4,5 +4,6 @@ authors = ["Jensen Lawrence <jptlawre@uwaterloo.ca>"]
 version = "0.0.1"
 
 [deps]
+Roots = "f2b01f46-fcfa-551c-844a-d8ac1e96c665"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
