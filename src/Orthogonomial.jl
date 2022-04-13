@@ -2,7 +2,6 @@ module Orthogonomial
 
 # Imports
 using Roots: find_zeros
-using StaticArrays: SVector
 using SpecialFunctions: gamma 
 
 # Abstract types 
