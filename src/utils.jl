@@ -17,11 +17,11 @@ end
     genbinom(x, y)
 
 Generalized binomial coefficient. Cases:
-- returns `binomial(x, y)` if x, y ∈ ℤ⁺
+- returns `binomial(x, y)` if x, y ∈ ℤ⁺ and 0 ≤ x ≤ 66
 - returns `gamma(x + 1)/(gamma(y + 1) * gamma(x - y + 1))` otherwise 
 """
 function genbinom(x::T1, y::T2) where {T1,T2<:Real}
-    if (typeof(x) <: Int) && (typeof(y) <: Int)
+    if (typeof(x) <: Int) && (typeof(y) <: Int) && (0 ≤ x ≤ 66)
         return binomial(x, y)
     else
         return gamma(x + 1)/(gamma(y + 1)*gamma(x - y + 1))
