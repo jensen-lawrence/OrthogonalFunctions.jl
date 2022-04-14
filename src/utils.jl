@@ -27,3 +27,16 @@ function genbinom(x::T1, y::T2) where {T1,T2<:Real}
         return gamma(x + 1)/(gamma(y + 1)*gamma(x - y + 1))
     end
 end
+
+"""
+    δ(n, m)
+
+Kronecker delta function.
+"""
+function δ(n::Int, m::Int)
+    if n == m
+        return 1
+    else
+        return 0
+    end
+end
