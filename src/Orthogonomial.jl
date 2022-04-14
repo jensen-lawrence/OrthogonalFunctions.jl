@@ -20,4 +20,15 @@ include("laguerre.jl")
 include("legendre.jl")
 include("utils.jl")
 
+# Exports 
+export degree, polynomial, weight, interval
+export innerproduct, roots 
+export ChebyshevT, T, ChebyshevFirst
+export ChebyshevU, U, ChebyshevSecond 
+export ChebyshevV, V, ChebyshevThird 
+export ChebyshevW, W, ChebyshevFourth 
+export GegenbauerC, C, Gegenbauer, Ultraspherical 
+export JacobiP, P, Jacobi 
+export LegendreP, P, Legendre
+
 end
