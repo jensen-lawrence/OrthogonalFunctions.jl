@@ -312,8 +312,11 @@ end
 Evaluates the nth Chebyshev polymomial of the third kind at x ∈ ℝ.
 """
 function chebyshev_V_f(n::Int, x::R) where {R<:Real}
-    U = ChebyshevU(n).f(x) - ChebyshevU(n - 1).f(x)
-    return U
+    if n ≥ 1
+        return ChebyshevU(n).f(x) - ChebyshevU(n - 1).f(x)
+    else
+        return 1
+    end
 end
 
 """
@@ -462,8 +465,11 @@ end
 Evaluates the nth Chebyshev polymomial of the fourth kind at x ∈ ℝ.
 """
 function chebyshev_W_f(n::Int, x::R) where {R<:Real}
-    U = ChebyshevU(n).f(x) + ChebyshevU(n - 1).f(x)
-    return U
+    if n ≥ 1
+        return ChebyshevU(n).f(x) + ChebyshevU(n - 1).f(x)
+    else
+        return 1
+    end
 end
 
 """
