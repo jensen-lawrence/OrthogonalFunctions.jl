@@ -42,7 +42,7 @@ Similarly, the orthogonality weight function w(x) can be evaluated using
 
 Aliases: `C`, `Gegenbauer`, `Ultraspherical`.
 """
-struct GegenbauerC{R<:Real} <: OrthogonalPolynomial
+struct GegenbauerC{R<:Real} <: AbstractJacobi
     n::Int 
     a::R 
     f
@@ -90,15 +90,6 @@ Alias of `GegenbauerC(n, a)`.
 """
 function Ultraspherical(n::Int, a::R) where {R<:Real}
     return GegenbauerC(n, a)
-end
-
-"""
-    roots(C)
-
-Returns the roots (zeros) of `C`.
-"""
-function roots(C::Gegenbauer)
-    return find_zeros(C, (-1, 1))
 end
 
 """

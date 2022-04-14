@@ -44,7 +44,7 @@ Similarly, the orthogonality weight function w(x) can be evaluated using
 
 Aliases: `P`, `Jacobi`.
 """
-struct JacobiP{R1<:Real,R2<:Real} <: OrthogonalPolynomial 
+struct JacobiP{R1<:Real,R2<:Real} <: AbstractJacobi
     n::Int
     a::R1 
     b::R2 
@@ -89,15 +89,6 @@ function Jacobi(n::Int, a::R1, b::R2) where {R1,R2<:Real}
 end
 
 """
-    roots(P)
-
-Returns the roots (zeros) of `P`.
-"""
-function roots(P::JacobiP)
-    return find_zeros(P, (-1, 1))
-end
-
-"""
     innerproduct(P1, P2)
 
 Returns the inner product of `P1` and `P2` using the orthgonality relation 
@@ -114,6 +105,19 @@ function innerproduct(P1::JacobiP, P2::JacobiP)
     χ = (gamma(n + a + 1) * gamma(n + b + 1))/(gamma(n + a + b + 1) * genfac(n))
     innerprod = ξ * χ * δ(n, m)
     return innerprod
+end
+
+# ----------------------------------------------------------------------------------------------------------------------
+# General
+# ----------------------------------------------------------------------------------------------------------------------
+
+"""
+    roots(F)
+
+Returns the roots (zeros) of `F`.
+"""
+function roots(F::AbstractJacobi)
+    return find_zeros(F, (-1, 1))
 end
 
 # ----------------------------------------------------------------------------------------------------------------------

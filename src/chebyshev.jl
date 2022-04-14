@@ -80,15 +80,6 @@ function ChebyshevFirst(n::Int)
 end
 
 """
-    roots(T)
-
-Returns the roots (zeros) of `T`.
-"""
-function roots(T::ChebyshevT)
-    return find_zeros(T, (-1, 1))
-end
-
-"""
     innerproduct(T1, T2)
 
 Returns the inner product of `T1` and `T2` using the orthogonality relation 
@@ -182,15 +173,6 @@ Alias of `ChebyshevU(n)`.
 """
 function ChebyshevSecond(n::Int)
     return ChebyshevU(n)
-end
-
-"""
-    roots(U)
-
-Returns the roots (zeros) of `U`.
-"""
-function roots(U::ChebyshevU)
-    return find_zeros(U, (-1, 1))
 end
 
 """
@@ -289,15 +271,6 @@ function ChebyshevThird(n::Int)
 end
 
 """
-    roots(V)
-
-Returns the roots (zeros) of `V`.
-"""
-function roots(V::ChebyshevV)
-    return find_zeros(V, (-1, 1))
-end
-
-"""
     innerproduct(V1, V2)
 
 Returns the inner product of `V1` and `V2` using the orthogonality relation 
@@ -390,15 +363,6 @@ Alias of `ChebyshevW(n)`.
 """
 function ChebyshevFourth(n::Int)
     return ChebyshevW(n)
-end
-
-"""
-    roots(W)
-
-Returns the roots (zeros) of `W`.
-"""
-function roots(W::ChebyshevW)
-    return find_zeros(W, (-1, 1))
 end
 
 """
