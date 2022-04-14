@@ -89,34 +89,6 @@ function Jacobi(n::Int, a::R1, b::R2) where {R1,R2<:Real}
 end
 
 """
-    degree(P)
-
-Returns the degree of `P`.
-"""
-degree(P::JacobiP) = P.n 
-
-"""
-    polynomial(P)
-
-Returns the polynomial function of `P`.
-"""
-polymomial(P::JacobiP) = P.f 
-
-"""
-    weight(P)
-
-Returns the orthogonality weight function of `P`.
-"""
-weight(P::JacobiP) = P.w 
-
-"""
-    interval(P)
-
-Returns the orthogonality interval of `P`.
-"""
-interval(P::JacobiP) = P.I 
-
-"""
     roots(P)
 
 Returns the roots (zeros) of `P`.

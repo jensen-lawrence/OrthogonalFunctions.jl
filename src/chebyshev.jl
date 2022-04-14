@@ -80,34 +80,6 @@ function ChebyshevFirst(n::Int)
 end
 
 """
-    degree(T)
-
-Returns the degree of `T`.
-"""
-degree(T::ChebyshevT) = T.n 
-
-"""
-    polynomial(T)
-
-Returns the polynomial function of `T`.
-"""
-polymomial(T::ChebyshevT) = T.f 
-
-"""
-    weight(T)
-
-Returns the orthogonality weight function of `T`.
-"""
-weight(T::ChebyshevT) = T.w 
-
-"""
-    interval(T)
-
-Returns the orthogonality interval of `T`.
-"""
-interval(T::ChebyshevT) = T.I
-
-"""
     roots(T)
 
 Returns the roots (zeros) of `T`.
@@ -211,34 +183,6 @@ Alias of `ChebyshevU(n)`.
 function ChebyshevSecond(n::Int)
     return ChebyshevU(n)
 end
-
-"""
-    degree(U)
-
-Returns the degree of `U`.
-"""
-degree(U::ChebyshevU) = U.n 
-
-"""
-    polynomial(U)
-
-Returns the polynomial function of `U`.
-"""
-polymomial(U::ChebyshevU) = U.f 
-
-"""
-    weight(U)
-
-Returns the orthogonality weight function of `U`.
-"""
-weight(U::ChebyshevU) = U.w 
-
-"""
-    interval(U)
-
-Returns the orthogonality interval of `U`.
-"""
-interval(U::ChebyshevU) = U.I
 
 """
     roots(U)
@@ -345,34 +289,6 @@ function ChebyshevThird(n::Int)
 end
 
 """
-    degree(V)
-
-Returns the degree of `V`.
-"""
-degree(V::ChebyshevV) = V.n 
-
-"""
-    polynomial(V)
-
-Returns the polynomial function of `V`.
-"""
-polymomial(V::ChebyshevV) = V.f 
-
-"""
-    weight(V)
-
-Returns the orthogonality weight function of `V`.
-"""
-weight(V::ChebyshevV) = V.w 
-
-"""
-    interval(V)
-
-Returns the orthogonality interval of `V`.
-"""
-interval(V::ChebyshevV) = V.I
-
-"""
     roots(V)
 
 Returns the roots (zeros) of `V`.
@@ -475,34 +391,6 @@ Alias of `ChebyshevW(n)`.
 function ChebyshevFourth(n::Int)
     return ChebyshevW(n)
 end
-
-"""
-    degree(W)
-
-Returns the degree of `W`.
-"""
-degree(W::ChebyshevW) = W.n 
-
-"""
-    polynomial(W)
-
-Returns the polynomial function of `W`.
-"""
-polymomial(W::ChebyshevW) = W.f 
-
-"""
-    weight(W)
-
-Returns the orthogonality weight function of `W`.
-"""
-weight(W::ChebyshevW) = W.w 
-
-"""
-    interval(W)
-
-Returns the orthogonality interval of `W`.
-"""
-interval(W::ChebyshevW) = W.I
 
 """
     roots(W)

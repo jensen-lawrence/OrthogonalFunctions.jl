@@ -93,34 +93,6 @@ function Ultraspherical(n::Int, a::R) where {R<:Real}
 end
 
 """
-    degree(C)
-
-Returns the degree of `C`.
-"""
-degree(C::GegenbauerC) = C.n 
-
-"""
-    polynomial(C)
-
-Returns the polynomial function of `C`.
-"""
-polymomial(C::GegenbauerC) = C.f 
-
-"""
-    weight(C)
-
-Returns the orthogonality weight function of `C`.
-"""
-weight(C::GegenbauerC) = C.w 
-
-"""
-    interval(C)
-
-Returns the orthogonality interval of `C`.
-"""
-interval(C::GegenbauerC) = C.I 
-
-"""
     roots(C)
 
 Returns the roots (zeros) of `C`.
