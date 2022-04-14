@@ -144,25 +144,4 @@ function innerproduct(P1::JacobiP, P2::JacobiP)
     return innerprod
 end
 
-"""
-    raise(P)
-
-Raises `P` from Pₙ to Pₙ₊₁.
-"""
-function raise(P::JacobiP)
-    n, a, b = P.n, P.a, P.b 
-    return JacobiP(n + 1, a, b)
-end
-
-"""
-    lower(P)
-
-Lowers `P` from Pₙ to Pₙ₋₁.
-"""
-function lower(P::JacobiP)
-    n, a, b = P.n, P.a, P.b 
-    n ≥ 1 || error("P₀ cannot be lowered further.")
-    return JacobiP(n - 1, a, b)
-end
-
 # ----------------------------------------------------------------------------------------------------------------------

@@ -144,25 +144,4 @@ function innerproduct(C1::GegenbauerC, C2::GegenbauerC)
     return innerprod
 end
 
-"""
-    raise(C)
-
-Raises `C` from Cₙ to Cₙ₊₁.
-"""
-function raise(C::GegenbauerC)
-    n, a = C.n, C.a 
-    return GegenbauerC(n + 1, a)
-end
-
-"""
-    lower(C)
-
-Raises `C` from Cₙ to Cₙ₋₁.
-"""
-function lower(C::Gegenbauer)
-    n, a = C.n, C.a
-    n ≥ 1 || error("C₀ cannot be lowered further.")
-    return GegenbauerC(n - 1, a)
-end
-
 # ----------------------------------------------------------------------------------------------------------------------

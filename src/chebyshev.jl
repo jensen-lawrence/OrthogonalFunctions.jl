@@ -131,27 +131,6 @@ function innerproduct(T1::ChebyshevT, T2::ChebyshevT)
     end
 end
 
-"""
-    raise(T)
-
-Raises `T` from Tₙ to Tₙ₊₁.
-"""
-function raise(T::ChebyshevT)
-    n = T.n
-    return ChebyshevT(n + 1)
-end
-
-"""
-    lower(T)
-
-Raises `T` from Tₙ to Tₙ₋₁.
-"""
-function lower(T::ChebyshevT)
-    n = T.n
-    n ≥ 1 || error("T₀ cannot be lowered further.")
-    return ChebyshevT(n - 1)
-end
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Chebyshev Polynomials of the Second Kind
 # ----------------------------------------------------------------------------------------------------------------------
@@ -279,27 +258,6 @@ for Chebyshev polynomials of the second kind.
 function innerproduct(U1::ChebyshevU, U2::ChebyshevU)
     n, m = U1.n, U2.n 
     return π/2 * δ(n, m)
-end
-
-"""
-    raise(U)
-
-Raises `U` from Uₙ to Uₙ₊₁.
-"""
-function raise(U::ChebyshevU)
-    n = U.n
-    return ChebyshevU(n + 1)
-end
-
-"""
-    lower(U)
-
-Raises `U` from Uₙ to Uₙ₋₁.
-"""
-function lower(U::ChebyshevU)
-    n = U.n
-    n ≥ 1 || error("U₀ cannot be lowered further.")
-    return ChebyshevU(n - 1)
 end
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -434,27 +392,6 @@ function innerproduct(V1::ChebyshevV, V2::ChebyshevV)
     return W * δ(n, m)
 end
 
-"""
-    raise(V)
-
-Raises `V` from Vₙ to Vₙ₊₁.
-"""
-function raise(V::ChebyshevV)
-    n = V.n
-    return ChebyshevV(n + 1)
-end
-
-"""
-    lower(V)
-
-Raises `V` from Vₙ to Vₙ₋₁.
-"""
-function lower(V::ChebyshevV)
-    n = V.n
-    n ≥ 1 || error("V₀ cannot be lowered further.")
-    return ChebyshevV(n - 1)
-end
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Chebyshev Polynomials of the Fourth Kind
 # ----------------------------------------------------------------------------------------------------------------------
@@ -585,27 +522,6 @@ for Chebyshev polynomials of the fourth kind.
 function innerproduct(W1::ChebyshevW, W2::ChebyshevW)
     n, m = W1.n, W2.n 
     return π * δ(n, m)
-end
-
-"""
-    raise(W)
-
-Raises `W` from Wₙ to Wₙ₊₁.
-"""
-function raise(W::ChebyshevW)
-    n = W.n
-    return ChebyshevW(n + 1)
-end
-
-"""
-    lower(W)
-
-Raises `W` from Wₙ to Wₙ₋₁.
-"""
-function lower(W::ChebyshevW)
-    n = W.n
-    n ≥ 1 || error("W₀ cannot be lowered further.")
-    return ChebyshevW(n - 1)
 end
 
 # ----------------------------------------------------------------------------------------------------------------------
