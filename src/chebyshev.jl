@@ -8,7 +8,7 @@
 Evaluates the nth Chebyshev polymomial of the first kind at x ∈ ℝ.
 """
 function chebyshev_T_f(n::Int, x::R) where {R<:Real}
-    T = sum([genbinom(n, 2k) * (x^2 - 1)^k x^(n - 2k) for k ∈ 0:floor(Int, n/2)])
+    T = sum([genbinom(n, 2k) * (x^2 - 1)^k * x^(n - 2k) for k ∈ 0:floor(Int, n/2)])
     return T
 end
 
@@ -104,7 +104,7 @@ end
 Evaluates the nth Chebyshev polymomial of the second kind at x ∈ ℝ.
 """
 function chebyshev_U_f(n::Int, x::R) where {R<:Real}
-    T = sum([genbinom(n + 1, 2k + 1) * (x^2 - 1)^k x^(n - 2k) for k ∈ 0:floor(Int, n/2)])
+    T = sum([genbinom(n + 1, 2k + 1) * (x^2 - 1)^k * x^(n - 2k) for k ∈ 0:floor(Int, n/2)])
     return T
 end
 
