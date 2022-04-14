@@ -278,7 +278,7 @@ for Chebyshev polynomials of the third kind.
 """
 function innerproduct(V1::ChebyshevV, V2::ChebyshevV)
     n, m = V1.n, V2.n 
-    return W * δ(n, m)
+    return π * δ(n, m)
 end
 
 # ----------------------------------------------------------------------------------------------------------------------
