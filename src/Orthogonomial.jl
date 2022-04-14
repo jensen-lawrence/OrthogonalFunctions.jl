@@ -13,7 +13,9 @@ abstract type AbstractChebyshev <: OrthogonalPolynomial end
 
 # Files
 include("chebyshev.jl")
+include("gegenbauer.jl")
 include("hermite.jl")
+include("jacobi.jl")
 include("laguerre.jl")
 include("legendre.jl")
 include("utils.jl")
