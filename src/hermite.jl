@@ -1,270 +1,185 @@
 # ----------------------------------------------------------------------------------------------------------------------
-# Hermite Polynomials 
+# Hermite Polynomials
 # ----------------------------------------------------------------------------------------------------------------------
 
 """
-    hermite_coefficients(n)
+    hermite_H_f(n, x)
 
-Calculates the coefficients of the nth Hermite polynomial using the power
-series representation of Hermite polynomials,
-
-``H_n(x) = n! \\sum_{k=0}^{\\lfloor n/2 \\rfloor} \\frac{(-1)^k}{k!(n - 2k)!} (2x)^{n - 2k}``.
-
-Coefficients are ordered from lowest to highest degree for compatibility
-with `evalpoly`.
+Evaluates the nth Hermite polynomial at x ∈ ℝ.
 """
-function hermite_coefficients(n::Int)
-    if n ≤ 20
-        nonzero = factorial(n) .* [((-1.0)^k * 2.0^(n - 2k))/(factorial(k) * factorial(n - 2k)) for k ∈ floor(n/2):-1:0]
-    else
-        nonzero = gamma(n + 1) .* [((-1.0)^k * 2.0^(n - 2k))/(gamma(k + 1) * gamma(n - 2k + 1)) for k ∈ floor(n/2):-1:0]
-    end
+function hermite_H_f(n::Int, x::R) where {R<:Real}
+    H = sum([((-1)^k)/(genfac(k) * genfac(n - 2k)) * (2x)^(n - 2k) for k ∈ 0:floor(Int, n/2)])
+    H *= genfac(n)
+    return H 
+end
 
-    nonzero = map(x -> round(x), nonzero)
+"""
+    hermite_H_w(x)
 
-    coefficients = zeros(n + 1)
-    if n % 2 == 0
-        for i ∈ 1:length(nonzero)
-            coefficients[2i-1] = nonzero[i]
-        end
-    else
-        for i ∈ 1:length(nonzero)
-            coefficients[2i] = nonzero[i]
-        end
+Evaluates the orthogonality weight function of the nth Hermite polynomial
+at x ∈ ℝ.
+"""
+function hermite_H_w(x::R) where {R<:Real}
+    return exp(-x^2)
+end
+
+"""
+    HermiteH(n)
+
+Representation of the nth Hermite polynomial, Hₙ, where n ∈ ℤ⁺.
+
+Available methods:
+- `HermiteH(n).n` returns n (the polynomial degree).
+- `HermiteH(n).f` returns the polyomial function.
+- `HermiteH(n).w` returns the orthogonality weight function.
+- `HermiteH(n).I` returns the orthogonality interval.
+
+`HermiteH(n)` is directly callable, so Hₙ(x) can be evaluated using 
+`HermiteH(n)(x)`. Hₙ(x) can also be evaluated using`HermiteH(n).f(x)`.
+Similarly, the orthogonality weight function w(x) can be evaluated using 
+`HermiteH(n).w(x)`.
+
+Aliases: `H`, `Hermite`.
+"""
+struct HermiteH <: AbstractHermite 
+    n::Int 
+    f 
+    w 
+    I 
+
+    function HermiteH(n)
+        n ≥ 0 || error("n must be non-negative.")
+        f = x -> hermite_H_f(n, x)
+        w = x -> hermite_H_w(x)
+        I = (-Inf, Inf)
+        new(n, f, w, I)
     end
-    return SVector{n+1}(coefficients)
+end
+
+# Make HermiteH(n) callable 
+function (H::HermiteH)(x::R) where {R<:Real}
+    return H.f(x)
+end
+
+"""
+    H(n)
+
+Alias of `HermiteH`.
+"""
+function H(n::Int)
+    return HermiteH(n)
 end
 
 """
     Hermite(n)
 
-Representation of the nth Hermite polynomial. Available methods include:
-- `n`: the polynomial degree 
-- `coefficients`: the polynomial coefficients 
-- `polynomial`: the polynomial function 
-- `weight`: the Hermite polynomial weight function, ``w(x) = e^{-x^2}``
-- `interval`: the Hermite polynomial orthogonality interval, ``(-\\infty, \\infty)``
+Alias of `HermiteH`.
 """
-struct Hermite <: AbstractHermite 
-    n::Int
-    coefficients
-    polynomial
-    weight
-    interval
-
-    function Hermite(n)
-        coefficients = hermite_coefficients(n)
-        polynomial = x -> evalpoly(x, coefficients)
-        weight = x -> exp(-x^2)
-        interval = (-Inf, Inf)
-        new(n, coefficients, polynomial, weight, interval)
-    end
+function Hermite(n::Int)
+    return HermiteH(n)
 end
-
-"""
-    HermiteH(n, x)
-    HermiteH(x; n)
-
-Evaluates the nth Hermite polynomial at x ∈ ℝ.
-"""
-function HermiteH(n::Int, x::T) where {T<:Real}
-    return Hermite(n).polynomial(x)
-end
-HermiteH(x; n) = HermiteH(n, x)
-
-"""
-    H(n, x)
-    H(x; n)
-
-Evaluates the nth Hermite polynomial at x ∈ ℝ.
-"""
-H(n, x) = HermiteH(n, x)
-H(x; n) = HermiteH(x; n)
-
-"""
-    coefficients(H)
-
-Determines the coefficients of a given Hermite polynomial.
-"""
-coefficients(H::Hermite) = H.coefficients 
-
-"""
-    weight(H)
-
-Determines the weight function of a given Hermite polynomial.
-"""
-weight(H::Hermite) = H.weight 
-
-"""
-    interval(H)
-
-Determines the interval of orthogonality of a given Hermite polynomial.
-"""
-interval(H::Hermite) = H.interval 
 
 """
     innerproduct(H1, H2)
 
-Calculates the inner product of the Hermite polynomials `H1` and `H2`
-using the orthogonality relation 
-
-``\\int_{-\\infty}^{\\infty} H_m(x) H_n(x) e^{-x^2} \\: \\mathrm{d}x = \\sqrt{\\pi} 2^n n! \\delta_{nm}``.
+Returns the inner product of `H1` and `H2` using the orthogonality relation 
+for Hermite polynomials.
 """
-function innerproduct(H1::Hermite, H2::Hermite)
-    n, m = H1.n, H2.n
-    if n != m
-        return 0
-    else
-        if n ≤ 20
-            n! = factorial(n)
-        else
-            n! = gamma(n + 1)
-        end
-        return √π * 2^n * n!
-    end
+function innerproduct(H1::HermiteH, H2::HermiteH)
+    n, m = H1.n, H2.n 
+    return √π * 2^n * genfac(n) * δ(n, m)
 end
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Probabilist's Hermite Polynomials 
+# Probabilist's Hermite Polynomials
 # ----------------------------------------------------------------------------------------------------------------------
 
 """
-    probabilist_hermite_coefficients(n)
+    hermite_He_f(n, x)
 
-Calculates the coefficients of the nth probabilist's Hermite polynomial
-using the power series representation of probabilist's Hermite polynomials,
-
-``He_n(x) = n! \\sum_{k=0}^{\\lfloor n/2 \\rfloor} \\frac{(-1)^k}{k!(n - 2k)!} \\frac{x^{n - 2k}}{2^k}``.
-
-Coefficients are ordered from lowest to highest degree for compatibility
-with `evalpoly`.
+Evaluates the nth probabilist's Hermite polynomial at x ∈ ℝ.
 """
-function probabilist_hermite_coefficients(n::Int)
-    if n ≤ 20
-        nonzero = factorial(n) .* [((-1.0)^k)/(2.0^k * factorial(k) * factorial(n - 2k)) for k ∈ floor(n/2):-1:0]
-    else
-        nonzero = gamma(n + 1) .* [((-1.0)^k)/(2.0^k * gamma(k + 1) * gamma(n - 2k + 1)) for k ∈ floor(n/2):-1:0]
-    end
+function hermite_He_f(n::Int, x::R) where {R<:Real}
+    He = sum([((-1)^k)/(genfac(k) * genfac(n - 2k)) * ((2x)^(n - 2k))/(2^k) for k ∈ 0:floor(Int, n/2)])
+    He *= genfac(n)
+    return He 
+end
 
-    nonzero = map(x -> round(x), nonzero)
+"""
+    hermite_He_w(x)
 
-    coefficients = zeros(n + 1)
-    if n % 2 == 0
-        for i ∈ 1:length(nonzero)
-            coefficients[2i-1] = nonzero[i]
-        end
-    else
-        for i ∈ 1:length(nonzero)
-            coefficients[2i] = nonzero[i]
-        end
+Evaluates the orthogonality weight function of the nth probabilist's
+Hermite polynomial at x ∈ ℝ.
+"""
+function hermite_He_w(x::R) where {R<:Real}
+    return exp(-(x^2)/2)
+end
+
+"""
+    HermiteHe(n)
+
+Representation of the nth Hermite polynomial, Heₙ, where n ∈ ℤ⁺.
+
+Available methods:
+- `HermiteHe(n).n` returns n (the polynomial degree).
+- `HermiteHe(n).f` returns the polyomial function.
+- `HermiteHe(n).w` returns the orthogonality weight function.
+- `HermiteHe(n).I` returns the orthogonality interval.
+
+`HermiteHe(n)` is directly callable, so Heₙ(x) can be evaluated using 
+`HermiteHe(n)(x)`. Heₙ(x) can also be evaluated using`HermiteHe(n).f(x)`.
+Similarly, the orthogonality weight function w(x) can be evaluated using 
+`HermiteHe(n).w(x)`.
+
+Aliases: `He`, `ProbabilistHermite`.
+"""
+struct HermiteHe <: AbstractHermite 
+    n::Int 
+    f 
+    w 
+    I 
+
+    function HermiteH(n)
+        n ≥ 0 || error("n must be non-negative.")
+        f = x -> hermite_He_f(n, x)
+        w = x -> hermite_He_w(x)
+        I = (-Inf, Inf)
+        new(n, f, w, I)
     end
-    return SVector{n+1}(coefficients)
+end
+
+# Make HermiteH(n) callable 
+function (He::HermiteHe)(x::R) where {R<:Real}
+    return He.f(x)
+end
+
+"""
+    He(n)
+
+Alias of `HermiteHe`.
+"""
+function He(n::Int)
+    return HermiteHe(n)
 end
 
 """
     ProbabilistHermite(n)
 
-Representation of the nth probabilist's Hermite polynomial. Available methods
-include:
-- `n`: the polynomial degree 
-- `coefficients`: the polynomial coefficients 
-- `polynomial`: the polynomial function 
-- `weight`: the probabilist's Hermite polynomial weight function, ``w(x) = e^{-(x^2)/2}``
-- `interval`: the probabillist's Hermite polynomial orthogonality interval, ``(-\\infty, \\infty)``
+Alias of `HermiteHe`.
 """
-struct ProbabilistHermite <: AbstractHermite 
-    n::Int
-    coefficients
-    polynomial
-    weight
-    interval
-
-    function ProbabilistHermite(n)
-        coefficients = probabilist_hermite_coefficients(n)
-        polynomial = x -> evalpoly(x, coefficients)
-        weight = x -> exp(-(x^2)/2)
-        interval = (-Inf, Inf)
-        new(n, coefficients, polynomial, weight, interval)
-    end
+function ProbabilistHermite(n::Int)
+    return HermiteHe(n)
 end
-
-"""
-    HermiteHe(n, x)
-    HermiteHe(x; n)
-
-Evaluates the nth probabilist's Hermite polynomial at x ∈ ℝ.
-"""
-function HermiteHe(n::Int, x::T) where {T<:Real}
-    return ProbabilistHermite(n).polynomial(x)
-end
-HermiteHe(x; n) = HermiteHe(n, x)
-
-"""
-    He(n, x)
-    He(x; n)
-
-Evaluates the nth probabilist's Hermite polynomial at x ∈ ℝ.
-"""
-He(n, x) = HermiteHe(n, x)
-He(x; n) = HermiteHe(x; n)
-
-"""
-    coefficients(He)
-
-Determines the coefficients of a given probabilist's Hermite polynomial.
-"""
-coefficients(He::ProbabilistHermite) = He.coefficients 
-
-"""
-    weight(He)
-
-Determines the weight function of a given probabilist's Hermite polynomial.
-"""
-weight(He::ProbabilistHermite) = He.weight 
-
-"""
-    interval(He)
-
-Determines the interval of orthogonality of a given probabilsit's Hermite
-polynomial.
-"""
-interval(He::ProbabilistHermite) = He.interval 
 
 """
     innerproduct(He1, He2)
 
-Calculates the inner product of the probabilist's Hermite polynomials
-`He1` and `He2` using the orthogonality relation 
-
-``\\int_{-\\infty}^{\\infty} He_m(x) He_n(x) e^{-(x/2)^2} \\: \\mathrm{d}x = \\sqrt{2\\pi} n! \\delta_{nm}``.
+Returns the inner product of `He1` and `He2` using the orthogonality relation 
+for probabilist's Hermite polynomials.
 """
-function innerproduct(He1::ProbabilistHermite, He2::ProbabilistHermite)
-    n, m = He1.n, He2.n
-    if n != m
-        return 0
-    else
-        if n ≤ 20
-            n! = factorial(n)
-        else
-            n! = gamma(n + 1)
-        end
-        return √(2π) * n!
-    end
+function innerproduct(He1::HermiteHe, He2::HermiteHe)
+    n, m = He1.n, He2.n 
+    return √(2π) * genfac(n) * δ(n, m)
 end
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Exports 
-# ----------------------------------------------------------------------------------------------------------------------
-
-export Hermite 
-export HermiteH 
-export H 
-export ProbabilistHermite 
-export HermiteHe 
-export He 
-export coefficients 
-export weight 
-export interval 
-export innerproduct
 
 # ----------------------------------------------------------------------------------------------------------------------
