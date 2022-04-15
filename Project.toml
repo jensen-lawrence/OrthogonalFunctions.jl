@@ -1,4 +1,4 @@
-name = "Orthogonomial"
+name = "OrthogonalFunctions"
 uuid = "89e53857-4b49-4cc9-917a-f7c4c7bf589a"
 authors = ["Jensen Lawrence <jptlawre@uwaterloo.ca>"]
 version = "0.0.1"
