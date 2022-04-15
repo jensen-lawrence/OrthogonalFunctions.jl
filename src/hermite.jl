@@ -192,7 +192,7 @@ end
 Returns the roots (zeros) of `F`.
 """
 function roots(F::AbstractHermite)
-    bound = -2*√(F.n)
+    bound = 2*√(F.n)
     return find_zeros(F, (-bound, bound))
 end
 
