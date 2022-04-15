@@ -1,2 +1,2 @@
-# Orthogonomial
-Orthogonomial is a Julia package for computing orthogonal polynomials including Laguerre, Hermite, Chebyshev, Legendre, and more.
+# OrthogonalFunctions.jl
+OrthogonalFunctions.jl is a Julia package for computing orthogonal functions.
