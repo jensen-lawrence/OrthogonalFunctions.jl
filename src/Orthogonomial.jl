@@ -27,8 +27,11 @@ export ChebyshevT, T, ChebyshevFirst
 export ChebyshevU, U, ChebyshevSecond 
 export ChebyshevV, V, ChebyshevThird 
 export ChebyshevW, W, ChebyshevFourth 
-export GegenbauerC, C, Gegenbauer, Ultraspherical 
+export GegenbauerC, C, Gegenbauer, Ultraspherical
+export HermiteH, H, Hermite 
+export HermiteHe, He, ProbabilistHermite  
 export JacobiP, P, Jacobi 
+export LaguerreL, L, Laguerre
 export LegendreP, P, Legendre
 
 end
