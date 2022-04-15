@@ -36,7 +36,7 @@ Available methods:
 - `GegenbauerC(n, a).I` returns the orthogonality interval.
 
 `GegenbauerC(n, a)` is directly callable, so Cₙᵃ(x) can be evaluated using 
-`GegenbauerC(n, a)(x)`. Cₙᵃ(x) can also be evaluated using`GegenbauerC(n, a).f(x)`.
+`GegenbauerC(n, a)(x)`. Cₙᵃ(x) can also be evaluated using `GegenbauerC(n, a).f(x)`.
 Similarly, the orthogonality weight function w(x) can be evaluated using 
 `GegenbauerC(n, a).w(x)`.
 

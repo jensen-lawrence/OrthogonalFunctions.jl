@@ -35,7 +35,7 @@ Available methods:
 - `HermiteH(n).I` returns the orthogonality interval.
 
 `HermiteH(n)` is directly callable, so Hₙ(x) can be evaluated using 
-`HermiteH(n)(x)`. Hₙ(x) can also be evaluated using`HermiteH(n).f(x)`.
+`HermiteH(n)(x)`. Hₙ(x) can also be evaluated using `HermiteH(n).f(x)`.
 Similarly, the orthogonality weight function w(x) can be evaluated using 
 `HermiteH(n).w(x)`.
 
@@ -127,7 +127,7 @@ Available methods:
 - `HermiteHe(n).I` returns the orthogonality interval.
 
 `HermiteHe(n)` is directly callable, so Heₙ(x) can be evaluated using 
-`HermiteHe(n)(x)`. Heₙ(x) can also be evaluated using`HermiteHe(n).f(x)`.
+`HermiteHe(n)(x)`. Heₙ(x) can also be evaluated using `HermiteHe(n).f(x)`.
 Similarly, the orthogonality weight function w(x) can be evaluated using 
 `HermiteHe(n).w(x)`.
 

@@ -35,7 +35,7 @@ Available methods:
 - `ChebyshevT(n).I` returns the orthogonality interval.
 
 `ChebyshevT(n)` is directly callable, so Tₙ(x) can be evaluated using 
-`ChebyshevT(n)(x)`. Tₙ(x) can also be evaluated using`ChebyshevT(n).f(x)`.
+`ChebyshevT(n)(x)`. Tₙ(x) can also be evaluated using `ChebyshevT(n).f(x)`.
 Similarly, the orthogonality weight function w(x) can be evaluated using 
 `ChebyshevT(n).w(x)`.
 
@@ -131,7 +131,7 @@ Available methods:
 - `ChebyshevU(n).I` returns the orthogonality interval.
 
 `ChebyshevU(n)` is directly callable, so Uₙ(x) can be evaluated using 
-`ChebyshevU(n)(x)`. Uₙ(x) can also be evaluated using`ChebyshevU(n).f(x)`.
+`ChebyshevU(n)(x)`. Uₙ(x) can also be evaluated using `ChebyshevU(n).f(x)`.
 Similarly, the orthogonality weight function w(x) can be evaluated using 
 `ChebyshevU(n).w(x)`.
 
@@ -226,7 +226,7 @@ Available methods:
 - `ChebyshevV(n).I` returns the orthogonality interval.
 
 `ChebyshevV(n)` is directly callable, so Vₙ(x) can be evaluated using 
-`ChebyshevV(n)(x)`. Vₙ(x) can also be evaluated using`ChebyshevV(n).f(x)`.
+`ChebyshevV(n)(x)`. Vₙ(x) can also be evaluated using `ChebyshevV(n).f(x)`.
 Similarly, the orthogonality weight function w(x) can be evaluated using 
 `ChebyshevV(n).w(x)`.
 
@@ -321,7 +321,7 @@ Available methods:
 - `ChebyshevW(n).I` returns the orthogonality interval.
 
 `ChebyshevW(n)` is directly callable, so Wₙ(x) can be evaluated using 
-`ChebyshevW(n)(x)`. Wₙ(x) can also be evaluated using`ChebyshevW(n).f(x)`.
+`ChebyshevW(n)(x)`. Wₙ(x) can also be evaluated using `ChebyshevW(n).f(x)`.
 Similarly, the orthogonality weight function w(x) can be evaluated using 
 `ChebyshevW(n).w(x)`.
 

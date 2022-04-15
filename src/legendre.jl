@@ -35,7 +35,7 @@ Available methods:
 - `LegendreP(n).I` returns the orthogonality interval.
 
 `LegendreP(n)` is directly callable, so Pₙ(x) can be evaluated using 
-`LegendreP(n)(x)`. Pₙ(x) can also be evaluated using`LegendreP(n).f(x)`.
+`LegendreP(n)(x)`. Pₙ(x) can also be evaluated using `LegendreP(n).f(x)`.
 Similarly, the orthogonality weight function w(x) can be evaluated using 
 `LegendreP(n).w(x)`.
 
