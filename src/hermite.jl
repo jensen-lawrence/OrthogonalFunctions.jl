@@ -139,7 +139,7 @@ struct HermiteHe <: AbstractHermite
     w 
     I 
 
-    function HermiteH(n)
+    function HermiteHe(n)
         n ≥ 0 || error("n must be non-negative.")
         f = x -> hermite_He_f(n, x)
         w = x -> hermite_He_w(x)
