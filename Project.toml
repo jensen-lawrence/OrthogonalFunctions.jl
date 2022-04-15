@@ -4,5 +4,6 @@ authors = ["Jensen Lawrence <jptlawre@uwaterloo.ca>"]
 version = "0.0.1"
 
 [deps]
+LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 Roots = "f2b01f46-fcfa-551c-844a-d8ac1e96c665"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
