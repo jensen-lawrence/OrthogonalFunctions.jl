@@ -148,7 +148,7 @@ struct HermiteHe <: AbstractHermite
     end
 end
 
-# Make HermiteH(n) callable 
+# Make HermiteHe(n) callable 
 function (He::HermiteHe)(x::R) where {R<:Real}
     return He.f(x)
 end
