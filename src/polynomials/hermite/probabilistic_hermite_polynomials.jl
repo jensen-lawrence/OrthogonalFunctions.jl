@@ -39,6 +39,7 @@ function (He::ProbabilisticHermitePolynomial)(x::T) where {T<:Union{Real,SymPy.S
 end
 
 # ProbabilisticHermitePolynomial(n) equality 
+import Base.:(==)
 ==(He1::ProbabilisticHermitePolynomial, He2::ProbabilisticHermitePolynomial) = He1.n == He2.n
 
 """
@@ -193,7 +194,7 @@ function differentiated_probabilistic_hermite_polynomial(n::Integer, k::Integer,
     sym = symbols(x)
     expr = latexify(differentiated_probabilistic_hermite_polynomial(n, k, sym))
     expr = replace(expr, "\\cdot " => "")
-    return latexstring(expr[1], "\\frac{\\mathrm{d}^{k}H_{n}}{\\mathrm{d}x^{k}} = ", expr[2:end])
+    return latexstring(expr[1], "\\frac{\\mathrm{d}^{$k}He_{$n}}{\\mathrm{d}x^{$k}} = ", expr[2:end])
 end
 
 """

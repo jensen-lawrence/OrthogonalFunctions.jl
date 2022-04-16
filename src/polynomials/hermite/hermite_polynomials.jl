@@ -38,6 +38,7 @@ function (H::HermitePolynomial)(x::T) where {T<:Union{Real,SymPy.Sym,AbstractStr
 end
 
 # HermitePolynomial(n) equality 
+import Base.:(==)
 ==(H1::HermitePolynomial, H2::HermitePolynomial) = H1.n == H2.n
 
 """
@@ -190,7 +191,7 @@ function differentiated_hermite_polynomial(n::Integer, k::Integer, x::AbstractSt
     sym = symbols(x)
     expr = latexify(differentiated_hermite_polynomial(n, k, sym))
     expr = replace(expr, "\\cdot " => "")
-    return latexstring(expr[1], "\\frac{\\mathrm{d}^{k}H_{n}}{\\mathrm{d}x^{k}} = ", expr[2:end])
+    return latexstring(expr[1], "\\frac{\\mathrm{d}^{$k}H_{$n}}{\\mathrm{d}x^{$k}} = ", expr[2:end])
 end
 
 """
