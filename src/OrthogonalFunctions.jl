@@ -5,7 +5,6 @@ using Roots: find_zeros
 using SpecialFunctions: gamma 
 using LaTeXStrings: latexstring
 using Latexify: latexify
-using Symbolics
 using SymPy
 
 # Files
