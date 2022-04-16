@@ -1,11 +1,11 @@
-module Orthogonomial
+module OrthogonalFunctions
 
 # Imports
+using LaTeXStrings
+using SymPy
 using Roots: find_zeros
 using SpecialFunctions: gamma 
-using LaTeXStrings: latexstring
 using Latexify: latexify
-using SymPy
 
 # Files
 include("types.jl")
