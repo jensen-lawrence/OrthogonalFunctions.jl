@@ -33,10 +33,4 @@ end
 
 Kronecker delta function.
 """
-function δ(n::Integer, m::Integer)
-    if n == m 
-        return 1 
-    else 
-        return 0
-    end
-end
+δ(n::Integer, m::Integer) = n == m ? one(Int64) : zero(Int64)
