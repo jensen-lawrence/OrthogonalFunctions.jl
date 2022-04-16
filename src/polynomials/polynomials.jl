@@ -1,27 +1,23 @@
+# Functions
 """
-    degree(F)
+    degree(p)
 
-Returns the degree of `F`.
+Returns the degree of `p`.
 """
-degree(F::OrthogonalPolynomial) = F.n 
-
-"""
-    polynomial(F)
-
-Returns the polynomial function of `F`.
-"""
-polymomial(F::OrthogonalPolynomial) = F.f 
+degree(p::AbstractOrthogonalPolynomial) = p.n 
 
 """
-    weight(F)
+    polynomial(p)
 
-Returns the orthogonality weight function of `F`.
+Returns the polynomial function of `p`.
 """
-weight(F::OrthogonalPolynomial) = F.w 
+polynomial(p::AbstractOrthogonalPolynomial) = p.f 
 
-"""
-    interval(F)
+# Files 
+include("hermite/hermite.jl")
+# include("jacobi/jacobi.jl")
+# include("laguerre/laguerre.jl")
 
-Returns the orthogonality interval of `F`.
-"""
-interval(F::OrthogonalPolynomial) = F.I 
+# Exports 
+export degree
+export polynomial
