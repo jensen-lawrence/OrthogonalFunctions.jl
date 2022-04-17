@@ -13,6 +13,16 @@ Returns the polynomial function of `p`.
 """
 polynomial(p::AbstractOrthogonalPolynomial) = p.f 
 
+"""
+    roots(p)
+
+Returns the roots of `p`.
+"""
+function roots(p::AbstractOrthogonalPolynomial)
+    @vars x 
+    return nroots(p(x))
+end
+
 # Files 
 include("hermite/hermite.jl")
 # include("jacobi/jacobi.jl")
@@ -21,3 +31,4 @@ include("hermite/hermite.jl")
 # Exports 
 export degree
 export polynomial
+export roots
